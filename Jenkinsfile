@@ -52,18 +52,18 @@ pipeline{
         //         }
         //     }
 
-            post{
-                always{
-                    echo "========always========"
-                }
-                success{
-                    echo "========A executed successfully========"
-                }
-                failure{
-                    echo "========A execution failed========"
-                }
-            }
-        }
+        //     post{
+        //         always{
+        //             echo "========always========"
+        //         }
+        //         success{
+        //             echo "========A executed successfully========"
+        //         }
+        //         failure{
+        //             echo "========A execution failed========"
+        //         }
+        //     }
+        // }
 
         stage ("Get Approval") {
             steps {
@@ -106,19 +106,19 @@ pipeline{
         //         sh 'cd aws_projects/create_servers/; aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform apply -var-file=environments/prod.tfvars --auto-approve'
         //         }
         //     }
-            post{
-                always{
-                    echo "========always========"
-                }
-                success{
-                    echo "========A executed successfully========"
-                }
-                failure{
-                    echo "========A execution failed========"
-                }
-            }
-        }
-    }
+    //         post{
+    //             always{
+    //                 echo "========always========"
+    //             }
+    //             success{
+    //                 echo "========A executed successfully========"
+    //             }
+    //             failure{
+    //                 echo "========A execution failed========"
+    //             }
+    //         }
+    //     }
+    // }
     post{
         always{
             echo "========always========"
