@@ -1,6 +1,6 @@
 provider "aws" {
   region  = var.region
-  profile = var.profile
+  # profile = var.profile
 }
 
 data "terraform_remote_state" "network" {
@@ -9,7 +9,7 @@ data "terraform_remote_state" "network" {
     bucket  = "cloudpart1buk"
     key     = "part1/terraform.tfstate"
     region  = "${var.region}"
-    profile = "${var.profile}"
+    # profile = "${var.profile}"
   }
 }
 
