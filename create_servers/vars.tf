@@ -19,14 +19,14 @@ variable "iam_role" {
 variable "installApp" {
   type = map(string)
   default = {
-    "tools1"          = "../../scripts/install_tools1.sh"
-    "baseline"        = "../../scripts/install_baseline.sh"
-    "baseline_tools"  = "../../scripts/install_baseline_tools.sh"
-    "nginx"           = "../../scripts/install_nginx.sh"
-    "apache"          = "../../scripts/install_apache.sh"
-    "monitoring"      = "../../scripts/install_monitoring.sh"
-    "ubuntu_baseline" = "../../scripts/ubuntu_baseline.sh"
-    "none"            = "../../scripts/install_none.sh"
+    "tools1"          = "../scripts/install_tools1.sh"
+    "baseline"        = "../scripts/install_baseline.sh"
+    "baseline_tools"  = "../scripts/install_baseline_tools.sh"
+    "nginx"           = "../scripts/install_nginx.sh"
+    "apache"          = "../scripts/install_apache.sh"
+    "monitoring"      = "../scripts/install_monitoring.sh"
+    "ubuntu_baseline" = "../scripts/ubuntu_baseline.sh"
+    "none"            = "../scripts/install_none.sh"
   }
 }
 
