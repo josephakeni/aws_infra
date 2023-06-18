@@ -8,7 +8,9 @@ dev_server_count      = 1
 # web_instance_count    = 0
 environment           = "develoment"
 role                  = "Dev_App_Server"
-# dev_server            = "Dev_App_Server"
+app_server            = "Dev_App_Server"
 # webServer             = "webServer"
 ubuntuServer          = "jenkinsServer"
 toolServer            = "toolServer"
+app_server_count = 1
+

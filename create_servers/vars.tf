@@ -39,7 +39,7 @@ variable "public_instance_count" {
 }
 
 variable "dev_server_count" {}
-#variable "prod_server_count" {}
+variable "app_server_count" {}
 
 # variable "zookeeper_count" {}
 
@@ -49,7 +49,7 @@ variable "public_ubuntu_count" {}
 
 variable "environment" {}
 variable "role" {}
-#variable "prod_server" {}
+variable "app_server" {}
 # variable "webServer" {}
 variable "ubuntuServer" {}
 variable "toolServer" {}
