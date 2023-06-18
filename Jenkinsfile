@@ -19,7 +19,7 @@ pipeline{
                 echo "========executing initialisation & plan on Dev========"
                 withCredentials([string(credentialsId: 'aws_access_key_id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
                 sh '''
-                cd aws_projects/create_servers/; aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform init
+                cd demo_aws_infra/create_servers/; aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform init
                 aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform plan -var-file=environments/dev.tfvars
                 '''
                 }
