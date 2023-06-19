@@ -9,5 +9,5 @@ role                  = "Dev_App_Server"
 app_server            = "Dev_App_Server"
 ubuntuServer          = "jenkinsServer"
 toolServer            = "toolServer"
-app_server_count = 0
+app_server_count      = 1
 
