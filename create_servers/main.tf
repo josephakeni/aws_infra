@@ -1,6 +1,6 @@
 module "ubuntu" {
   source           = "../modules/ec2"
-  instance_count   = var.public_ubuntu_count
+  instance_count   = var.jenkins_instance_count
   ami_id           = data.aws_ami.ubuntu.id
   instance_type    = var.instance_type
   iam_role       = var.iam_role

@@ -40,18 +40,9 @@ variable "public_instance_count" {
 
 variable "dev_server_count" {}
 variable "app_server_count" {}
-
-# variable "zookeeper_count" {}
-
-
-variable "public_ubuntu_count" {}
-# variable "web_instance_count" {}
-
+variable "jenkins_instance_count" {}
 variable "environment" {}
 variable "role" {}
 variable "app_server" {}
-# variable "webServer" {}
 variable "ubuntuServer" {}
 variable "toolServer" {}
-
-# variable "aws_vpc_main" {} 
