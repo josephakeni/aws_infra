@@ -27,6 +27,7 @@ variable "installApp" {
     "monitoring"      = "../scripts/install_monitoring.sh"
     "ubuntu_baseline" = "../scripts/ubuntu_baseline.sh"
     "none"            = "../scripts/install_none.sh"
+    "amz_baseline_tools" ="../scripts/amz_baseline_tools.sh"
   }
 }
 
