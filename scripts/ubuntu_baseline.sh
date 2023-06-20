@@ -41,8 +41,8 @@ sudo usermod --shell /bin/bash jenkins
 
 sudo apt-get install python3-pip -y
 sudo pip3 --version
-sudo -H pip3 install --user boto
-sudo -H pip3 install boto
+sudo -H pip3 install --user boto3
+sudo -H pip3 install boto3
 
 # Create GOPATH for jenkins user & download the webapp from GitHub
 go install github.com/hashicorp/learn-go-webapp-demo@latest

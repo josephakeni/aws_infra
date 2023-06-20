@@ -2,13 +2,13 @@ module "ubuntu" {
   source           = "../modules/ec2"
   instance_count   = var.jenkins_instance_count
   ami_id           = data.aws_ami.ubuntu.id
-  instance_type    = var.instance_type
+  instance_type    = "t2.medium"
   iam_role         = var.iam_role
   subnet_id        = [data.terraform_remote_state.network.outputs.public_subnets[0]]
   main_sg_id       = data.terraform_remote_state.network.outputs.main_sg_id
   bootstrap_script = [var.installApp["tools1"]]
   name             = var.ubuntuServer
-  environment      = var.environment
+  environment      = ""
   role             = var.toolServer
 
 }
