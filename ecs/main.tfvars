@@ -19,3 +19,6 @@ ingress_rules = [
 ]
 
 # app_port = 3000
+desired_capacity = 2
+max_size         = 3
+min_size         = 1

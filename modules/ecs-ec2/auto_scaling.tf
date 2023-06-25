@@ -15,10 +15,10 @@ resource "aws_launch_configuration" "main" {
 }
 
 resource "aws_autoscaling_group" "main" {
-  desired_capacity     = 1
+  desired_capacity     = var.desired_capacity
   health_check_type    = "ELB"
   launch_configuration = aws_launch_configuration.main.name
-  max_size             = 2
+  max_size             = var.max_size
   min_size             = 1
   name                 = "${var.ecs_cluster_name}-asg"
 

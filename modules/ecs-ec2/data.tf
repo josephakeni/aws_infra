@@ -20,7 +20,7 @@ data "terraform_remote_state" "network" {
 }
 
 data "template_file" "user_data" {
-  template = file("../../templates/ecs/user_data.sh.tpl")
+  template = file("../templates/ecs/user_data.sh.tpl")
   vars = {
     ecs_cluster_name = var.ecs_cluster_name
     app_image      = var.app_image
@@ -28,7 +28,7 @@ data "template_file" "user_data" {
 }
 
 data "template_file" "ec2_cb_app" {
-  template = file("../../templates/ecs/ec2_cb_app.json.tpl")
+  template = file("../templates/ecs/ec2_cb_app.json.tpl")
 
   vars = {
     app_image      = var.app_image
