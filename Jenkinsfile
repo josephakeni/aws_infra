@@ -19,7 +19,7 @@ pipeline{
                 echo "========executing initialisation & plan on Dev========"
                 withCredentials([string(credentialsId: 'aws_access_key_id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
                 sh '''
-                cd create_servers/; aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform init
+                cd ecs/; aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform init
                 aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform plan -var-file=environments/dev.tfvars
                 '''
                 }
@@ -46,7 +46,7 @@ pipeline{
     //     //         echo "========executing initialisation & plan on Prod========"
     //     //         withCredentials([string(credentialsId: 'aws_access_key_id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
     //     //         sh '''
-    //     //         cd aws_projects/create_servers/; aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform init
+    //     //         cd aws_projects/ecs/; aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform init
     //     //         aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform plan -var-file=environments/prod.tfvars
     //     //         '''
     //     //         }
@@ -80,7 +80,7 @@ pipeline{
             steps{
                 echo "========performing terraform apply on Dev========"
                 withCredentials([string(credentialsId: 'aws_access_key_id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-                sh 'cd create_servers/; aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform apply -var-file=environments/dev.tfvars --auto-approve'
+                sh 'cd ecs/; aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform apply -var-file=environments/dev.tfvars --auto-approve'
                 }
             }
             post{
@@ -103,7 +103,7 @@ pipeline{
     //     //     steps{
     //     //         echo "========performing terraform apply on Prod========"
     //     //         withCredentials([string(credentialsId: 'aws_access_key_id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-    //     //         sh 'cd aws_projects/create_servers/; aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform apply -var-file=environments/prod.tfvars --auto-approve'
+    //     //         sh 'cd aws_projects/ecs/; aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform apply -var-file=environments/prod.tfvars --auto-approve'
     //     //         }
     //     //     }
     // //         post{
