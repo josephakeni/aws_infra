@@ -20,7 +20,7 @@ pipeline{
                 withCredentials([string(credentialsId: 'aws_access_key_id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
                 sh '''
                 cd ecs/; aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform init
-                aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform plan -var-file=environments/dev.tfvars
+                aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform plan -var-file=main.tfvars
                 '''
                 }
             }
@@ -80,7 +80,7 @@ pipeline{
             steps{
                 echo "========performing terraform apply on Dev========"
                 withCredentials([string(credentialsId: 'aws_access_key_id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-                sh 'cd ecs/; aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform apply -var-file=environments/dev.tfvars --auto-approve'
+                sh 'cd ecs/; aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform apply -var-file=main.tfvars --auto-approve'
                 }
             }
             post{
