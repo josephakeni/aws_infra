@@ -1,14 +1,6 @@
-module "roles" {
-  source = "../modules/roles"
-}
 
-module "ecs-lbsg" {
-  source        = "../modules/securityGroups"
-  aws_vpc_main  = data.terraform_remote_state.network.outputs.main_vpc_id
-  name          = "ecs-lb-sg"
-  description   = "Allow traffic to ECS from instances"
-  ingress_rules = var.ingress_rules
-}
+
+
 
 # module "ecs-fargate" {
 #   source                               = "../modules/ecs-fargate"
@@ -27,14 +19,14 @@ module "ecs-lbsg" {
 # }
 
 module "ecs-ec2" {
-  source               = "../modules/ecs-ec2"
-  security_groups      = [module.ecs-lbsg.sg_id]
+  source               = "../../modules/ecs-ec2"
+  security_groups      = [data.terraform_remote_state.network.outputs.ecs-lbsg]
   subnets              = [data.terraform_remote_state.network.outputs.public_subnets[0], data.terraform_remote_state.network.outputs.public_subnets[1]]
   aws_vpc_main         = data.terraform_remote_state.network.outputs.main_vpc_id
-  container_name       = "zaizi_app"
-  ecs_cluster_name     = "zaizi-ec2"
+  container_name       = "zaizi_prod"
+  ecs_cluster_name     = "zaizi-ec2-prod"
   launch_type          = "EC2"
-  execution_role_arn   = module.roles.ecs_task_execution_role
+  execution_role_arn   = data.terraform_remote_state.network.outputs.ecs_task_execution_role
   network_mode         = "bridge"
   iam_instance_profile = "TundeSSMRole"
   instance_type        = "t2.micro"

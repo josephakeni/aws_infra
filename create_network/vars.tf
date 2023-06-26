@@ -40,7 +40,7 @@ variable "availability_zones" {
   default = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
 }
 
-variable "app_port" {}
+# variable "app_port" {}
 
 variable "ingress_rules" {
   type = list(object({

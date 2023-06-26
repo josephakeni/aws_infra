@@ -55,3 +55,17 @@ output "main_private_ids" {
 # output "alb_hostname" {
 #   value = module.alb.alb_hostname
 # }
+output "ecs_task_execution_role" {
+  value = module.roles.ecs_task_execution_role
+  #  sensitive   = true
+  description = "ecs_task_execution_role"
+  #  depends_on  = []
+}
+
+output "ecs_container_service_autoscale_role" {
+  value       = module.roles.ecs_container_service_autoscale_role
+  description = "ecs_container_service_autoscale_role"
+}
+output "ecs-lbsg" {
+  value = module.ecs-lbsg.sg_id
+}

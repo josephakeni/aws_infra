@@ -3,6 +3,17 @@ provider "aws" {
   #profile = "${var.profile}"
 }
 
+module "roles" {
+  source = "../modules/roles"
+}
+module "ecs-lbsg" {
+  source        = "../modules/securityGroups"
+  aws_vpc_main  = data.terraform_remote_state.network.outputs.main_vpc_id
+  name          = "ecs-lb-sg"
+  description   = "Allow traffic to ECS from instances"
+  ingress_rules = var.ingress_rules
+}
+
 module "main_vpc" {
   source              = "../modules/vpc"
   main_vpc_cidr_block = var.main_vpc_cidr_block
