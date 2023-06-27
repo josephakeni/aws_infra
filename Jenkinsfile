@@ -41,7 +41,7 @@ pipeline{
 
         stage ("Get Approval for prod") {
             when {
-                branch "dev"
+                branch "master"
             }
             steps {
                 script {
