@@ -1,10 +1,6 @@
 pipeline{
     agent any
-    environment {
-        DEV_BUILD_VERSION='v5'
-        TEST_BUILD_VERSION = "v5"
-        PROD_BUILD_VERSION = "v5"
-    }
+    
     stages{
         stage ("check docker version") {
                         steps {
@@ -24,7 +20,6 @@ pipeline{
                 echo "========executing initialisation & plan on Prod========"
                 withCredentials([string(credentialsId: 'aws_access_key_id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
                 sh '''
-                sudo sed "s/zaizi_app:.*/zaizi_app:${PROD_BUILD_VERSION}/" ecs/prod/main.tf
                 cd ecs/prod/; aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform init
                 aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform plan -var-file=main.tfvars
                 '''
