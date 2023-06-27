@@ -1,5 +1,11 @@
-
-
+container_name       = "zaizi_dev"
+ecs_cluster_name     = "zaizi-ec2-dev"
+launch_type          = "EC2"
+network_mode         = "bridge"
+iam_instance_profile = "TundeSSMRole"
+instance_type        = "t2.micro"
+key_name             = "cloud1a"
+app_port             = "3000"
 # app_port = 3000
 desired_capacity = 1
 max_size         = 2
