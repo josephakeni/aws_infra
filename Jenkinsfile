@@ -1,5 +1,10 @@
 pipeline{
     agent any
+    environment {
+        DEV_BUILD_VERSION='v5'
+        TEST_BUILD_VERSION = "v5"
+        PROD_BUILD_VERSION = "v5"
+    }
     stages{
         stage ("check docker version") {
                         steps {
@@ -11,15 +16,16 @@ pipeline{
                 }
         }
 
-        stage("perform terraform initialisation & plan dev branch "){
-            // when {
-            //     branch "dev"
-            // }
+        stage("perform terraform initialisation & plan prod branch "){
+            when {
+                branch "master"
+            }
             steps{
-                echo "========executing initialisation & plan on Dev========"
+                echo "========executing initialisation & plan on Prod========"
                 withCredentials([string(credentialsId: 'aws_access_key_id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
                 sh '''
-                cd ecs/; aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform init
+                sudo sed "s/zaizi_app:.*/zaizi_app:${PROD_BUILD_VERSION}/" ecs/prod/main.tfvars
+                cd ecs/prod/; aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform init
                 aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform plan -var-file=main.tfvars
                 '''
                 }
@@ -38,33 +44,6 @@ pipeline{
             }
         }
 
-    //     // stage("perform terraform initialisation & plan master branch "){
-    //     //     when {
-    //     //         branch "master"
-    //     //     }
-    //     //     steps{
-    //     //         echo "========executing initialisation & plan on Prod========"
-    //     //         withCredentials([string(credentialsId: 'aws_access_key_id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-    //     //         sh '''
-    //     //         cd aws_projects/ecs/; aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform init
-    //     //         aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform plan -var-file=environments/prod.tfvars
-    //     //         '''
-    //     //         }
-    //     //     }
-
-    //     //     post{
-    //     //         always{
-    //     //             echo "========always========"
-    //     //         }
-    //     //         success{
-    //     //             echo "========A executed successfully========"
-    //     //         }
-    //     //         failure{
-    //     //             echo "========A execution failed========"
-    //     //         }
-    //     //     }
-    //     // }
-
         stage ("Get Approval") {
             steps {
                 script {
@@ -74,13 +53,13 @@ pipeline{
         }
         
         stage("perform terraform apply dev branch "){
-            // when {
-            //     branch "dev"
-            // }
+            when {
+                branch "master"
+            }
             steps{
                 echo "========performing terraform apply on Dev========"
                 withCredentials([string(credentialsId: 'aws_access_key_id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-                sh 'cd ecs/; aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform apply -var-file=main.tfvars --auto-approve'
+                sh 'cd ecs/prod/; aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform apply -var-file=main.tfvars --auto-approve'
                 }
             }
             post{
@@ -96,39 +75,6 @@ pipeline{
             }
         }
 
-    //     // stage("perform terraform apply master branch "){
-    //     //     when {
-    //     //         branch "master"
-    //     //     }
-    //     //     steps{
-    //     //         echo "========performing terraform apply on Prod========"
-    //     //         withCredentials([string(credentialsId: 'aws_access_key_id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-    //     //         sh 'cd aws_projects/ecs/; aws_access_key_id=$AWS_ACCESS_KEY_ID aws_secret_access_key=$AWS_SECRET_ACCESS_KEY terraform apply -var-file=environments/prod.tfvars --auto-approve'
-    //     //         }
-    //     //     }
-    // //         post{
-    // //             always{
-    // //                 echo "========always========"
-    // //             }
-    // //             success{
-    // //                 echo "========A executed successfully========"
-    // //             }
-    // //             failure{
-    // //                 echo "========A execution failed========"
-    // //             }
-    // //         }
-    // //     }
-    // // }
-    // post{
-    //     always{
-    //         echo "========always========"
-    //     }
-    //     success{
-    //         echo "========pipeline executed successfully ========"
-    //     }
-    //     failure{
-    //         echo "========pipeline execution failed========"
-    //     }
-    // }
+    
     }
 }
