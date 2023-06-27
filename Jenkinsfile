@@ -39,7 +39,10 @@ pipeline{
             }
         }
 
-        stage ("Get Approval") {
+        stage ("Get Approval for prod") {
+            when {
+                branch "dev"
+            }
             steps {
                 script {
                     def userInput = input(id: 'confirm', message: 'Apply Terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Apply terraform', name: 'comfirm'] ])
@@ -97,6 +100,9 @@ pipeline{
         }
 
         stage ("Get Approval for Dev") {
+            when {
+                branch "dev"
+            }
             steps {
                 script {
                     def userInput = input(id: 'confirm', message: 'Apply Terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Apply terraform', name: 'comfirm'] ])
