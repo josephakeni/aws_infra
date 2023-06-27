@@ -1,0 +1,13 @@
+# Ignore the .terraform folder
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+*terraform
+*.ini
+*.retry
+*.pem
+*.json
+install_baseline.sh
+tf-packer*
+*.bkp
