@@ -31,7 +31,7 @@ module "ecs-ec2" {
   iam_instance_profile = var.iam_instance_profile
   instance_type        = var.instance_type
   key_name             = var.key_name
-  app_image            = var.app_image
+  app_image            = "jakeni/zaizi_app:v2"
   app_port             = var.app_port
   desired_capacity     = var.desired_capacity
   max_size             = var.max_size

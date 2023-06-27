@@ -5,7 +5,6 @@ network_mode         = "bridge"
 iam_instance_profile = "TundeSSMRole"
 instance_type        = "t2.micro"
 key_name             = "cloud1a"
-app_image            = "jakeni/zaizi_app:v2"
 app_port             = "3000"
 # app_port = 3000
 desired_capacity = 1
