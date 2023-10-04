@@ -69,3 +69,7 @@ output "ecs_container_service_autoscale_role" {
 output "ecs-lbsg" {
   value = module.ecs-lbsg.sg_id
 }
+
+output "aws_route53_zone" {
+  value = module.r53.aws_route53_zone
+} 

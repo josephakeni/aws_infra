@@ -32,7 +32,11 @@ variable "public_subnets" {
 }
 
 variable "private_subnets" {
-  default = ["10.0.16.0/20", "10.0.32.0/20"]
+  default = ["10.0.16.0/24", "10.0.32.0/24"]
+}
+
+variable "db_subnets" {
+  default = ["10.0.17.0/24", "10.0.33.0/24"]
 }
 
 variable "availability_zones" {

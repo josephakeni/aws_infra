@@ -3,11 +3,15 @@ provider "aws" {
   #profile = "${var.profile}"
 }
 
+module "r53" {
+  source = "git::git@github.com:josephakeni/aws_modules.git//r53"
+}
+
 module "roles" {
-  source = "../modules/roles"
+  source = "git::git@github.com:josephakeni/aws_modules.git//roles"
 }
 module "ecs-lbsg" {
-  source        = "../modules/securityGroups"
+  source        = "git::git@github.com:josephakeni/aws_modules.git//securityGroups"
   aws_vpc_main  = data.terraform_remote_state.network.outputs.main_vpc_id
   name          = "ecs-lb-sg"
   description   = "Allow traffic to ECS from instances"
@@ -15,7 +19,7 @@ module "ecs-lbsg" {
 }
 
 module "main_vpc" {
-  source              = "../modules/vpc"
+  source              = "git::git@github.com:josephakeni/aws_modules.git//vpc"
   main_vpc_cidr_block = var.main_vpc_cidr_block
   tenancy             = var.tenancy
   private_subnets     = var.private_subnets
@@ -23,6 +27,7 @@ module "main_vpc" {
   public_subnets      = var.public_subnets
   environment         = var.environment
   availability_zones  = var.availability_zones
+  db_subnets = var.db_subnets
 }
 
 # module "alb" {
